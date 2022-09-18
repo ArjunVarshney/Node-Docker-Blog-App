@@ -85,7 +85,7 @@ To run this project, you will need to configure the following environment variab
 
 `REDIS_PORT` - default set to 6379
 
-Inside mongo service (inside docker-compose.dev.yml):-
+Inside node-app service (inside docker-compose.dev.yml):-
 
 `MONGO_USER` - default set to "Arjun" i.e. my name
 
@@ -93,8 +93,50 @@ Inside mongo service (inside docker-compose.dev.yml):-
 
 `SESSION_SECRET` - default set to "secret"
 
-Configure the docker-compose.prod.yml file yourself for deploying the app
+Inside mongo service (inside docker-compose.dev.yml):-
 
+`MONGO_INITDB_ROOT_USERNAME` - default set to "Arjun"
+
+`MONGO_INITDB_ROOT_PASSWORD` - default set to "admin"
+
+When putting in production :-
+
+`MONGO_INITDB_ROOT_USERNAME`
+
+`MONGO_INITDB_ROOT_PASSWORD`
+
+`MONGO_USER`
+
+`MONGO_PASSWORD`
+
+`SESSION_SECRET`
+
+These should be added as environment variable inside the linux server you are deploying to.
+
+**To set a env variable in the linux machine:-**
+
+- Open root folder in your machine. Then,
+
+```bash
+vi .env
+```
+
+- Write all the variables with proper names and desired values.
+- Then go to your .profile folder inside your system's root folder (it is hidden you can see it using `ls -a`)
+- Open the `.profile` folder in vim using
+
+```bash
+vi .profile
+```
+
+- Inside the `.profile` file at the bottom of the file add
+
+```bash
+set -o allexport; source /root/.env; set +o allexport
+```
+
+- This is will set all the variable You wrote in the `.env` file whenever you restart your machine
+- After following the steps exit and re-enter your machine.
 
 
 ## Acknowledgements
